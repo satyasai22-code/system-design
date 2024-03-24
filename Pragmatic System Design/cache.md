@@ -24,7 +24,7 @@ App Layer -> Cache layer -> Storage layer
    - Cons:
      - Cache misses are expensive
      - Data staleness(old data when compared to storage)
-     - Implementation complexity(Devs need to have apis both for cache and db)
+     - Implementation complexity(Devs need to have apis for both cache and db)
 
 **Read Through**
    - Application doesn't hv direct access to storage(db) but interacts with cache api
@@ -39,7 +39,7 @@ App Layer -> Cache layer -> Storage layer
      - Reliability
 
 - **Write Through**
-   - SImilar like Read through but releated to updated than fetch
+   - Similar like Read through but releated to update than fetch
    - App layer updates cache layer and then cache layer updates storage layer
    - No data staleness as each update pass through cache layer before storage layer
    - Pros:
@@ -81,6 +81,14 @@ App Layer -> Cache layer -> Storage layer
 - Key - value
 - Limited by RAM(Biggest are 500GB RAM)
 - Supports 100k+ requests/sec on single node
+- has TTL(Time to Live) mechanism(After TTL the key wont be found in cache)
+- TTL is very imp otherwise cache runs out of memory
+- supports persistence(saves from RAM to DISK. Imp for Disaster Recovery)
+- If persistence is supported then why not Redis as db? No. Redis cant be used as DB as redis persists data into disk for every 1 second(1 sec(not milli sec or micro sec) for better performance). In case of crash, we lose data of last second
+- Redis is a remote server. So it comes with network latency and added complexity. Egs: What should we do when we cant connect to Redis? In case of crash can we work with db or other services in the mean time?
+### Data Types
+  - Supports: String, List, Set, Hash and some others
+  - Not supported: JSON or nested data types 
 # More Read 
  - https://medium.datadriveninvestor.com/all-things-caching-use-cases-benefits-strategies-choosing-a-caching-technology-exploring-fa6c1f2e93aa
  - https://en.wikipedia.org/wiki/Cache_replacement_policies
