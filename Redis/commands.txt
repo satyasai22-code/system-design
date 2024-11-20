@@ -1,0 +1,14 @@
+MONITOR   (traffic)
+MEMORY USAGE <key>
+CONFIG GET * (config of redis)
+CONFIG GET maxmemory-policy
+CONFIG GET maxmemory
+  
+CONFIG SET maxmemory <bytes> (set to limit memory)
+
+redis-cli INFO memory  (monitor memory usage)
+
+keys *
+get key
+set key
+del key
